@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Button } from "antd";
 import React from "react";
 import { NavLink } from "react-router-dom";
+// import { Stores } from "../stores/index";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,8 +36,9 @@ const Header = () => {
       </Div>
       <Div>
         <StyledButton type="primary">
-          <StyledLink to="/login"> 登录</StyledLink>
+          <StyledLink to="/login">登录</StyledLink>
         </StyledButton>
+
         <StyledButton type="primary">
           <StyledLink to="/register">注册</StyledLink>
         </StyledButton>

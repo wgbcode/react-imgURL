@@ -1,8 +1,8 @@
-import xxx from "../models/index";
-console.log(xxx);
+import AuthForm from "../components/AuthForm";
 
 const Login = () => {
-  return <div>Login</div>;
+  const name = "login";
+  return <AuthForm name={name} />;
 };
 
 export default Login;
