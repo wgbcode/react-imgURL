@@ -2,7 +2,8 @@ import { Auth, UpLoader } from "../models/index";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Stores } from "../stores/index";
+import Stores from "../stores/index";
+import { observer } from "mobx-react";
 
 const Wrapper = styled.div`
   width: 40vw;
@@ -20,7 +21,7 @@ const StyledForm = styled(Form)`
     -2px -2px 4px 0 rgba(0, 0, 0, 0.2);
 `;
 
-const AuthForm = ({ name }) => {
+const AuthForm = observer(({ name }) => {
   const navigate = useNavigate();
   const onFinish = (values) => {
     const { username, password } = values;
@@ -108,7 +109,7 @@ const AuthForm = ({ name }) => {
       </StyledForm>
     </Wrapper>
   );
-};
+});
 
 window.Auth = Auth;
 window.UpLoader = UpLoader;

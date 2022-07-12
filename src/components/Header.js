@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { Button } from "antd";
 import React from "react";
 import { NavLink } from "react-router-dom";
-// import { Stores } from "../stores/index";
+import Stores from "../stores/index";
+import { observer } from "mobx-react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ const StyledButton = styled(Button)`
   margin: 0 8px;
 `;
 
-const Header = () => {
+const Header = observer(() => {
   return (
     <Wrapper>
       <Div>
@@ -35,16 +36,21 @@ const Header = () => {
         <StyledLink to="/about">关于我</StyledLink>
       </Div>
       <Div>
-        <StyledButton type="primary">
-          <StyledLink to="/login">登录</StyledLink>
-        </StyledButton>
-
+        {Stores.currentUser ? (
+          <StyledButton type="primary">
+            <StyledLink to="/login">登录</StyledLink>
+          </StyledButton>
+        ) : (
+          <StyledButton type="primary">
+            <StyledLink to="/login">注销</StyledLink>
+          </StyledButton>
+        )}
         <StyledButton type="primary">
           <StyledLink to="/register">注册</StyledLink>
         </StyledButton>
       </Div>
     </Wrapper>
   );
-};
+});
 
 export default Header;
