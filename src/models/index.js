@@ -34,16 +34,22 @@ const Auth = {
   },
 };
 const UpLoader = {
-  add() {
-    const todo = new AV.Object("string");
-    todo.set("title", "马拉松报名");
-    todo.set("priority", 2);
-    return new Promise((resolve, reject) =>
-      todo.save().then(
-        (value) => resolve(value),
-        (error) => reject(error)
-      )
-    );
+  add(file, filename) {
+    const item = new AV.Object("Image");
+    const avFile = new AV.File(filename, file);
+    item.set("owner", AV.User.current());
+    item.set("filename", filename);
+    item.set("url", avFile);
+    return new Promise((resolve, reject) => {
+      item.save().then(
+        (serverFile) => {
+          resolve(serverFile);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   },
   find() {
     const query = new AV.Query("string");

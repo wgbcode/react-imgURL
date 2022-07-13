@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: colomn;
   justify-content: space-between;
-  background: grey;
-  padding: 16px 35px;
+  background: white;
+  padding: 12px 35px;
 `;
 const Div = styled.div`
   display: flex;
@@ -33,6 +33,9 @@ const Header = observer(() => {
     Auth.logout();
     window.Auth = Auth;
   };
+  const resetServerFiled = () => {
+    Stores.serverFile = null;
+  };
   return (
     <Wrapper>
       <Div>
@@ -42,6 +45,13 @@ const Header = observer(() => {
       </Div>
       {Stores.currentUser ? (
         <Div>
+          {Stores.serverFile ? (
+            <StyledButton type="primary" onClick={resetServerFiled}>
+              重新上传
+            </StyledButton>
+          ) : (
+            ""
+          )}
           <StyledButton type="primary" onClick={() => logout()}>
             注销
           </StyledButton>
