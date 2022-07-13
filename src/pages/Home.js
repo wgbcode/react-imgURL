@@ -1,30 +1,43 @@
 import Stores from "../stores/index";
 import { observer } from "mobx-react";
-import { InboxOutlined } from "@ant-design/icons";
+// import { InboxOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Uploader from "../components/Uploader";
 import ShowImg from "../components/ShowImg";
+import add from "../icons/add.svg";
 
 const WrapperWarn = styled.div`
   font-size: 14px;
-  background: #d1ecf1;
-  margin: 0 100px;
-  padding: 20px;
+  background: black;
+  margin: 50px 100px 10px 100px;
+  padding: 10px;
+  border-radius: 4px;
+  color: red;
 `;
 const WrapperUpload = styled.div`
-  border: 1px solid red;
-  margin: 0 100px;
+  margin: 20px 100px;
   .title {
     h1 {
       text-shadow: 4px 3px 1px rgba(108, 101, 101, 0.47);
       font-size: 24px;
     }
     p {
-      font-size: 14px;
+      font-size: 12px;
+      font-weigth:300;
     }
-    .ant-upload-picture-card-wrapper {
-      width: 100%;
-      border: 1px solid red;
+  }
+ .ant-upload-picture-card-wrapper {
+    border:1px dashed black;
+    :hover{
+       border:1px dashed #38adf4;
+    }
+    .ant-upload {
+        width: 100%;
+        background:white;
+        height:250px;
+        margin:0;
+        border:none;
+      }
     }
   }
 `;
@@ -46,7 +59,12 @@ const Home = observer(() => {
           </div>
 
           <Uploader listType="picture-card">
-            <InboxOutlined />
+            <div>
+              <img src={add} style={{ height: 50, width: 50 }} />
+              <div style={{ fontSize: 14, fontWeight: 345 }}>
+                点击添加文件,即可上传!
+              </div>
+            </div>
           </Uploader>
         </WrapperUpload>
       )}
