@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main>
+      <main className="main">
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} exact />

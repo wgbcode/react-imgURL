@@ -35,6 +35,7 @@ const Header = observer(() => {
   };
   const resetServerFiled = () => {
     Stores.serverFile = null;
+    console.log(Stores.serverFile);
   };
   return (
     <Wrapper>

@@ -3,72 +3,54 @@ import { observer } from "mobx-react";
 import { InboxOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Uploader from "../components/Uploader";
-import Icon from "../icon/icon";
+import ShowImg from "../components/ShowImg";
 
-const WrapperImg = styled.div`
-  position: relative;
-  background: #323232;
-  height: 60vh;
+const WrapperWarn = styled.div`
+  font-size: 14px;
+  background: #d1ecf1;
+  margin: 0 100px;
+  padding: 20px;
 `;
-const Img = styled.img`
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  max-height: 50vh;
-  display: black;
-`;
-const WrapperText = styled.div`
-  display: flex;
-  align-items: center;
-  h4 {
-    width: 200px;
-    padding: 0px 16px 0px 30px;
-  }
-  input {
-    width: 800px;
-  }
-`;
-const WrapperIll = styled.div`
+const WrapperUpload = styled.div`
   border: 1px solid red;
+  margin: 0 100px;
+  .title {
+    h1 {
+      text-shadow: 4px 3px 1px rgba(108, 101, 101, 0.47);
+      font-size: 24px;
+    }
+    p {
+      font-size: 14px;
+    }
+    .ant-upload-picture-card-wrapper {
+      width: 100%;
+      border: 1px solid red;
+    }
+  }
 `;
 const Home = observer(() => {
   return (
     <>
-      {Stores.currentUser ? "" : <div>请登录后再进行图片上传操作！</div>}
+      {Stores.currentUser ? (
+        ""
+      ) : (
+        <WrapperWarn>请登录后再进行图片上传操作！</WrapperWarn>
+      )}
       {Stores.serverFile ? (
         ""
       ) : (
-        <Uploader listType="picture-card">
-          <InboxOutlined />
-        </Uploader>
+        <WrapperUpload>
+          <div className="title">
+            <h1>Image Upload</h1>
+            <p>最大可上传 5.00 MB 的图片，单次同时可选择 20 张。</p>
+          </div>
+
+          <Uploader listType="picture-card">
+            <InboxOutlined />
+          </Uploader>
+        </WrapperUpload>
       )}
-      {Stores.serverFile ? (
-        <div>
-          <WrapperImg>
-            <Img src={Stores.serverFile.attributes.url.attributes.url} alt="" />
-          </WrapperImg>
-          <WrapperIll>
-            <div>
-              <Icon name="illustration" />
-            </div>
-            <span>直接源文件链接</span>
-          </WrapperIll>
-          <WrapperText>
-            <h4>文件名</h4>
-            <input value={Stores.serverFile.attributes.filename} readOnly />
-          </WrapperText>
-          <WrapperText>
-            <h4>图片 URL</h4>
-            <input
-              value={Stores.serverFile.attributes.url.attributes.url}
-              readOnly
-            />
-          </WrapperText>
-        </div>
-      ) : (
-        ""
-      )}
+      <ShowImg />
     </>
   );
 });
