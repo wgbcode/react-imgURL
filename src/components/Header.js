@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Button } from "antd";
 import { NavLink } from "react-router-dom";
 import Stores from "../stores/index";
+import { Auth } from "../models/index";
 import { observer } from "mobx-react";
 
 const Wrapper = styled.div`
@@ -28,8 +29,9 @@ const StyledButton = styled(Button)`
 
 const Header = observer(() => {
   const logout = () => {
-    console.log(Stores.currentUser);
     Stores.resetUser();
+    Auth.logout();
+    window.Auth = Auth;
   };
   return (
     <Wrapper>
@@ -40,17 +42,17 @@ const Header = observer(() => {
       </Div>
       {Stores.currentUser ? (
         <Div>
+          <StyledButton type="primary" onClick={() => logout()}>
+            注销
+          </StyledButton>
+        </Div>
+      ) : (
+        <Div>
           <StyledButton type="primary">
             <StyledLink to="/login">登录</StyledLink>
           </StyledButton>
           <StyledButton type="primary">
             <StyledLink to="/register">注册</StyledLink>
-          </StyledButton>
-        </Div>
-      ) : (
-        <Div>
-          <StyledButton type="primary" onClick={() => logout()}>
-            注销
           </StyledButton>
         </Div>
       )}

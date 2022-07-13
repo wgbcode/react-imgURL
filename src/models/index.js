@@ -26,6 +26,9 @@ const Auth = {
       )
     );
   },
+  logout() {
+    AV.User.logOut();
+  },
   getCurrentUser() {
     return AV.User.current();
   },

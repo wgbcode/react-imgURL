@@ -27,14 +27,15 @@ const AuthForm = observer(({ name }) => {
     const { username, password } = values;
     if (name === "register") {
       Auth.register(username, password)
-        .then(() => {
-          navigate("/login");
-          Stores.pullUser();
-        })
+        .then(navigate("/login"))
         .catch((error) => console.log(error));
     } else {
       Auth.login(username, password)
-        .then(navigate("/home"))
+        .then(() => {
+          navigate("/home");
+          Stores.pullUser();
+          window.Auth = Auth;
+        })
         .catch((error) => console.log(error));
     }
   };
