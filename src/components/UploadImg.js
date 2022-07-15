@@ -2,26 +2,24 @@ import Stores from "../stores/index";
 import { observer } from "mobx-react";
 import { Upload, message } from "antd";
 
-const Uploader = observer((props) => {
+const UploadImg = observer((props) => {
   const UploadProps = {
     showUploadList: false,
     beforeUpload: (file) => {
-      console.log(file);
       if (Stores.currentUser === null) {
         message.warning("请先登录再上传！");
         return false;
       }
-      window.file = file;
-      if (!/(svg$)|(png$)|(jpg$)|(jpeg$)|(gif$)/gi.test(file.type)) {
-        message.error("只能上传png/svg/jpg/gif格式的图片");
+      if (!/(png$)|(jpg$)|(jpeg$)|(gif$)/gi.test(file.type)) {
+        message.error("只能上传png/jpg/gif格式的图片");
         return false;
       }
       if (file.size > 1024 * 1024 * 5) {
-        message.error("图片最大1M");
+        message.error("图片最大5M");
         return false;
       }
 
-      Stores.upload(file, file.name)
+      Stores.uploadImg(file, file.name)
         .then((serverFile) => {
           console.log("上传成功", serverFile);
         })
@@ -41,4 +39,4 @@ const Uploader = observer((props) => {
   );
 });
 
-export default Uploader;
+export default UploadImg;

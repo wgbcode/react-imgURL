@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Stores from "../stores/index";
 import { Auth } from "../models/index";
 import { observer } from "mobx-react";
+import { useEffect } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,6 +12,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   background: white;
   padding: 12px 35px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 `;
 const Div = styled.div`
   display: flex;
@@ -31,16 +33,19 @@ const Header = observer(() => {
   const logout = () => {
     Stores.resetUser();
     Auth.logout();
-    window.Auth = Auth;
   };
   const resetServerFiled = () => {
     Stores.serverFile = null;
-    console.log(Stores.serverFile);
   };
+  useEffect(() => {
+    Stores.pullUser();
+  }, []);
   return (
     <Wrapper>
       <Div>
-        <StyledLink to="/home">首页</StyledLink>
+        <StyledLink to="/home" onClick={() => (Stores.serverFile = null)}>
+          首页
+        </StyledLink>
         <StyledLink to="/history">历史记录</StyledLink>
         <StyledLink to="/about">关于我</StyledLink>
       </Div>

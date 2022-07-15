@@ -1,4 +1,4 @@
-import { Auth, UpLoader } from "../models/index";
+import { Auth, Uploader } from "../models/index";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const AuthForm = observer(({ name }) => {
       Auth.register(username, password)
         .then(navigate("/login"))
         .catch((error) => console.log(error));
-    } else {
+    } else if (name === "login") {
       Auth.login(username, password)
         .then(() => {
           navigate("/home");
@@ -111,8 +111,5 @@ const AuthForm = observer(({ name }) => {
     </Wrapper>
   );
 });
-
-window.Auth = Auth;
-window.UpLoader = UpLoader;
 
 export default AuthForm;

@@ -1,8 +1,7 @@
 import Stores from "../stores/index";
 import { observer } from "mobx-react";
-// import { InboxOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import Uploader from "../components/Uploader";
+import UploadImg from "../components/UploadImg";
 import ShowImg from "../components/ShowImg";
 import add from "../icons/add.svg";
 
@@ -50,25 +49,27 @@ const Home = observer(() => {
         <WrapperWarn>请登录后再进行图片上传操作！</WrapperWarn>
       )}
       {Stores.serverFile ? (
-        ""
+        <ShowImg />
       ) : (
         <WrapperUpload>
           <div className="title">
             <h1>Image Upload</h1>
             <p>最大可上传 5.00 MB 的图片，单次同时可选择 20 张。</p>
           </div>
-
-          <Uploader listType="picture-card">
-            <div>
-              <img src={add} style={{ height: 50, width: 50 }} />
-              <div style={{ fontSize: 14, fontWeight: 345 }}>
-                点击添加文件,即可上传!
+          <UploadImg listType="picture-card">
+            {Stores.isLoading ? (
+              <div>上传中</div>
+            ) : (
+              <div>
+                <img src={add} style={{ height: 50, width: 50 }} />
+                <div style={{ fontSize: 14, fontWeight: 345 }}>
+                  点击或拖拽文件,即可完成上传!
+                </div>
               </div>
-            </div>
-          </Uploader>
+            )}
+          </UploadImg>
         </WrapperUpload>
       )}
-      <ShowImg />
     </>
   );
 });

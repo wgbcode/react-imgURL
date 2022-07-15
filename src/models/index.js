@@ -33,7 +33,7 @@ const Auth = {
     return AV.User.current();
   },
 };
-const UpLoader = {
+const Uploader = {
   add(file, filename) {
     const item = new AV.Object("Image");
     const avFile = new AV.File(filename, file);
@@ -52,15 +52,24 @@ const UpLoader = {
     });
   },
   find() {
-    const query = new AV.Query("string");
-    query.equalTo("title", "马拉松报名");
-    return new Promise((resolve, reject) =>
-      query.find().then(
-        (value) => resolve(value),
-        (error) => reject(error)
-      )
-    );
+    const query = new AV.Query("Image");
+    query.include("owner");
+    // query.limit(limit);
+    // query.skip(page * limit);
+    query.descending("createdAt");
+    query.equalTo("owner", AV.User.current());
+    return new Promise((resolve, reject) => {
+      query
+        .find()
+        .then((results) => {
+          resolve(results);
+          // console.log(results);
+        })
+        .catch((error) => reject(error));
+    });
   },
 };
 
-export { Auth, UpLoader };
+window.Auth = Auth;
+window.Uploader = Uploader;
+export { Auth, Uploader };
