@@ -57,7 +57,7 @@ const Home = observer(() => {
             <p>最大可上传 5.00 MB 的图片，单次同时可选择 20 张。</p>
           </div>
           <UploadImg listType="picture-card">
-            {Stores.isLoading ? (
+            {Stores.isUpLoading ? (
               <div>上传中</div>
             ) : (
               <div>

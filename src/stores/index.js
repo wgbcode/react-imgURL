@@ -3,17 +3,14 @@ import { Auth, Uploader } from "../models/index";
 import { message } from "antd";
 
 class Stores {
+  currentUser = null;
+  isUpLoading = false;
+  serverFile = null;
+  newHistoryList = [];
+  isHistoryLoading = false;
   constructor() {
     makeAutoObservable(this);
   }
-  currentUser = null;
-  isLoading = false;
-  serverFile = null;
-  newHistoryList = [];
-  historyPage = 1;
-  historyLimit = 10;
-  isHistoryLoading = false;
-  hasMoreHistory = true;
   pullUser() {
     this.currentUser = Auth.getCurrentUser();
   }
@@ -22,12 +19,14 @@ class Stores {
     this.serverFile = null;
   }
   uploadImg(file, filename) {
-    this.isUpoading = true;
+    this.action(this.isUpLoading, true);
     this.serverFile = null;
     return new Promise((resolve, reject) => {
       Uploader.add(file, filename)
         .then((serverFile) => {
-          runInAction(() => (this.serverFile = serverFile));
+          runInAction(() => {
+            this.serverFile = serverFile;
+          });
           resolve(serverFile);
         })
         .catch((err) => {
@@ -35,37 +34,35 @@ class Stores {
           reject(err);
         })
         .finally(() => {
-          this.isUpoading = false;
+          this.action(this.isUpLoading, false);
         });
     });
   }
-  resetServerFile() {
-    runInAction(() => (this.serverFile = null));
-  }
 
   findHistory() {
-    this.isHistoryLoading = true;
+    this.action(this.isHistoryLoading, true);
     Uploader.find({ page: this.historyPage, limit: this.historyLimit })
       .then((newList) => {
-        console.log("newList", newList);
         runInAction(() => {
           this.newHistoryList = this.newHistoryList.concat(newList);
         }); //只能在 action 中赋值
-        this.historyPage++;
-        if (newList.length < this.historyLimit) {
-          this.hasMoreHistory = false;
-        }
       })
       .catch((error) => {
         message.error("加载数据失败");
         console.log(error);
       })
       .finally(() => {
-        this.isLoading = false;
+        this.action(this.isHistoryLoading, false);
       });
   }
   resetHistory() {
     this.newHistoryList = [];
+  }
+  resetServerFile() {
+    this.serverFile = null;
+  }
+  action(name, newValue) {
+    runInAction(() => (name = newValue));
   }
 }
 

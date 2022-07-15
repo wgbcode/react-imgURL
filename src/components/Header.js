@@ -40,9 +40,7 @@ const Header = observer(() => {
   return (
     <Wrapper>
       <Div>
-        <StyledLink to="/home" onClick={() => Stores.resetServerFile()}>
-          首页
-        </StyledLink>
+        <StyledLink to="/home">首页</StyledLink>
         <StyledLink to="/history">历史记录</StyledLink>
         <StyledLink to="/about">关于我</StyledLink>
       </Div>
