@@ -34,16 +34,13 @@ const Header = observer(() => {
     Stores.resetUser();
     Auth.logout();
   };
-  const resetServerFiled = () => {
-    Stores.serverFile = null;
-  };
   useEffect(() => {
     Stores.pullUser();
   }, []);
   return (
     <Wrapper>
       <Div>
-        <StyledLink to="/home" onClick={() => (Stores.serverFile = null)}>
+        <StyledLink to="/home" onClick={() => Stores.resetServerFile()}>
           首页
         </StyledLink>
         <StyledLink to="/history">历史记录</StyledLink>
@@ -52,7 +49,10 @@ const Header = observer(() => {
       {Stores.currentUser ? (
         <Div>
           {Stores.serverFile ? (
-            <StyledButton type="primary" onClick={resetServerFiled}>
+            <StyledButton
+              type="primary"
+              onClick={() => Stores.resetServerFile()}
+            >
               重新上传
             </StyledButton>
           ) : (

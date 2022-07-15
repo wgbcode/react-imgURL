@@ -27,7 +27,7 @@ class Stores {
     return new Promise((resolve, reject) => {
       Uploader.add(file, filename)
         .then((serverFile) => {
-          this.serverFile = serverFile;
+          runInAction(() => (this.serverFile = serverFile));
           resolve(serverFile);
         })
         .catch((err) => {
@@ -38,6 +38,9 @@ class Stores {
           this.isUpoading = false;
         });
     });
+  }
+  resetServerFile() {
+    runInAction(() => (this.serverFile = null));
   }
 
   findHistory() {

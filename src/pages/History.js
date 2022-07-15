@@ -1,17 +1,10 @@
 import * as React from "react";
 import { useEffect } from "react";
 import Stores from "../stores/index";
-import { LikeOutlined, MessageOutlined, StarOutlined } from "@ant-design/icons";
 import { Avatar, List, Space } from "antd";
 import { observer } from "mobx-react";
 import dayjs from "dayjs";
-import styled from "styled-components";
 
-// const Wrapper = styled.div`
-//   border: 1px solid red;
-//   height: 80vh;
-//   width: 80vw;
-// `;
 const History = observer(() => {
   useEffect(() => {
     Stores.findHistory();
