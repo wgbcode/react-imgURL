@@ -1,9 +1,11 @@
 import Stores from "../stores/index";
 import { observer } from "mobx-react";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import UploadImg from "../components/UploadImg";
 import ShowImg from "../components/ShowImg";
 import add from "../icons/add.svg";
+import { Spin } from "antd";
+import upload from "../icons/upload.svg";
 
 const WrapperWarn = styled.div`
   font-size: 14px;
@@ -22,21 +24,39 @@ const WrapperUpload = styled.div`
     }
     p {
       font-size: 12px;
-      font-weigth:300;
+      font-weigth: 300;
     }
   }
- .ant-upload-picture-card-wrapper {
-    border:1px dashed black;
-    :hover{
-       border:1px dashed #38adf4;
-    }
-    .ant-upload {
-        width: 100%;
-        background:white;
-        height:250px;
-        margin:0;
-        border:none;
+  .loadImg1 {
+    padding: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(0, 0, 0, 0.2);
+    .ant-upload-picture-card-wrapper {
+      border: 1px dashed black;
+      :hover {
+        border: 1px dashed #38adf4;
       }
+      .ant-upload {
+        width: 100%;
+        background: white;
+        height: 250px;
+        margin: 0;
+        border: none;
+      }
+    }
+  }
+  .loadImg2 {
+    margin-top: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding-left: 10px;
+    button {
+      border: none;
+      background: #2383eb;
+      color: white;
+      padding: 6px 15px;
     }
   }
 `;
@@ -56,18 +76,29 @@ const Home = observer(() => {
             <h1>Image Upload</h1>
             <p>最大可上传 5.00 MB 的图片，单次同时可选择 20 张。</p>
           </div>
-          <UploadImg listType="picture-card">
-            {Stores.isUpLoading ? (
-              <div>上传中</div>
-            ) : (
-              <div>
-                <img src={add} style={{ height: 50, width: 50 }} />
-                <div style={{ fontSize: 14, fontWeight: 345 }}>
-                  点击或拖拽文件,即可完成上传!
+          <div className="loadImg1">
+            <UploadImg listType="picture-card">
+              {Stores.isUpLoading ? (
+                <Spin />
+              ) : (
+                <div>
+                  <img src={add} style={{ height: 50, width: 50 }} />
+                  <div style={{ fontSize: 14, fontWeight: 345 }}>
+                    拖拽文件到这里,即可完成上传...
+                  </div>
                 </div>
-              </div>
-            )}
-          </UploadImg>
+              )}
+            </UploadImg>
+          </div>
+          <div className="loadImg2">
+            <span>请选择你要上传的文件...</span>
+
+            <UploadImg listType="">
+              <button>
+                <span>选择</span>
+              </button>
+            </UploadImg>
+          </div>
         </WrapperUpload>
       )}
     </>

@@ -7,7 +7,6 @@ class Stores {
   isUpLoading = false;
   serverFile = null;
   newHistoryList = [];
-  isHistoryLoading = false;
   constructor() {
     makeAutoObservable(this);
   }
@@ -19,7 +18,9 @@ class Stores {
     this.serverFile = null;
   }
   uploadImg(file, filename) {
-    this.action(this.isUpLoading, true);
+    runInAction(() => {
+      this.isUpLoading = true;
+    });
     this.serverFile = null;
     return new Promise((resolve, reject) => {
       Uploader.add(file, filename)
@@ -34,13 +35,14 @@ class Stores {
           reject(err);
         })
         .finally(() => {
-          this.action(this.isUpLoading, false);
+          runInAction(() => {
+            this.isUpLoading = false;
+          });
         });
     });
   }
 
   findHistory() {
-    this.action(this.isHistoryLoading, true);
     Uploader.find({ page: this.historyPage, limit: this.historyLimit })
       .then((newList) => {
         runInAction(() => {
@@ -50,9 +52,6 @@ class Stores {
       .catch((error) => {
         message.error("加载数据失败");
         console.log(error);
-      })
-      .finally(() => {
-        this.action(this.isHistoryLoading, false);
       });
   }
   resetHistory() {
@@ -60,9 +59,6 @@ class Stores {
   }
   resetServerFile() {
     this.serverFile = null;
-  }
-  action(name, newValue) {
-    runInAction(() => (name = newValue));
   }
 }
 
