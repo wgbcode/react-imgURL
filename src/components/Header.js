@@ -78,7 +78,7 @@ const Header = observer(() => {
                 onClick={() => Stores.resetServerFile()}
                 style={{ height: "25px", padding: "0 20px" }}
               >
-                重新上传
+                Image Upload
               </StyledButton>
             </>
           ) : (

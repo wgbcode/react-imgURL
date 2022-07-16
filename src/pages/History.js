@@ -53,7 +53,7 @@ const History = observer(() => {
         height: "100%",
       }}
     >
-      {Stores.currentUser ? (
+      {Stores.currentUser && Stores.newHistoryList.length !== 0 ? (
         <List
           style={{
             margin: "10px 200px 0px 100px",
@@ -62,13 +62,15 @@ const History = observer(() => {
               "2px 2px 4px 0 rgba(0,0,0,0.1),-2px -2px 4px 0 rgba(0,0,0,0.)",
             borderRadius: "4px 4px 0 0",
             background: "white",
+            flexGrow: "1",
           }}
           itemLayout="vertical"
           size="large"
           pagination={{
-            pageSize: 5,
+            pageSize: 4,
             defaultCurrent: 1,
             total: `${Stores.newHistoryList.length}`,
+            hideOnSinglePage: true,
           }}
           dataSource={data}
           renderItem={(item) => (
@@ -94,7 +96,7 @@ const History = observer(() => {
           style={{
             background: "white",
             flexGrow: "1",
-            padding: "100px",
+            padding: "150px",
           }}
           renderItem={(item) => <List.Item key={item.heft}></List.Item>}
         />

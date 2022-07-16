@@ -1,5 +1,5 @@
 import { Auth } from "../models/index";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Stores from "../stores/index";
@@ -27,8 +27,13 @@ const AuthForm = observer(({ name }) => {
     const { username, password } = values;
     if (name === "register") {
       Auth.register(username, password)
-        .then(navigate("/login"))
-        .catch((error) => console.log(error));
+        .then(() => {
+          navigate("/login");
+        })
+        .catch((error) => {
+          message.error("用户名已存在！");
+          console.log(error);
+        });
     } else if (name === "login") {
       Auth.login(username, password)
         .then(() => {
@@ -91,19 +96,25 @@ const AuthForm = observer(({ name }) => {
         >
           <Input.Password />
         </StyledForm.Item>
+
         {name === "register" ? (
           <StyledForm.Item
             label="确认密码"
             name="confirm"
-            rules={[passwordConfirm]}
+            rules={[{ required: true, message: "" }, passwordConfirm]}
           >
             <Input.Password />
           </StyledForm.Item>
         ) : (
           ""
         )}
+
         <StyledForm.Item wrapperCol={{ offset: 6, span: 8 }}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ borderRadius: "4px" }}
+          >
             Submit
           </Button>
         </StyledForm.Item>
