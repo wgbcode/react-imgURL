@@ -1,4 +1,4 @@
-import { Auth, Uploader } from "../models/index";
+import { Auth } from "../models/index";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";

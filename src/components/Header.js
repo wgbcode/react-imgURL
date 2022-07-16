@@ -5,14 +5,15 @@ import Stores from "../stores/index";
 import { Auth } from "../models/index";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
+import logo from "../icons/logo.svg";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: colomn;
   justify-content: space-between;
   background: white;
-  padding: 12px 35px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  padding: 12px 35px 18px 35px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 `;
 const Div = styled.div`
   display: flex;
@@ -26,7 +27,9 @@ const StyledLink = styled(NavLink)`
   font-size: 14px;
 `;
 const StyledButton = styled(Button)`
-  margin: 0 8px;
+  margin: 0 12px;
+  border-radius: 4px;
+  padding: 0;
 `;
 
 const Header = observer(() => {
@@ -40,7 +43,13 @@ const Header = observer(() => {
   return (
     <Wrapper>
       <Div>
-        <StyledLink to="/home">首页</StyledLink>
+        <img
+          src={logo}
+          style={{ height: "2em", paddingRight: "20px", paddingTop: "3px" }}
+        />
+        <StyledLink to="/home" onClick={() => Stores.resetServerFile()}>
+          首页
+        </StyledLink>
         <StyledLink to="/history">历史记录</StyledLink>
         <StyledLink to="/about">关于我</StyledLink>
       </Div>
@@ -48,21 +57,26 @@ const Header = observer(() => {
         <Div>
           {Stores.serverFile ? (
             <StyledButton
-              type="primary"
+              type="default"
               onClick={() => Stores.resetServerFile()}
+              style={{ height: "25px", padding: "0 20px" }}
             >
               重新上传
             </StyledButton>
           ) : (
             ""
           )}
-          <StyledButton type="primary" onClick={() => logout()}>
-            注销
+          <StyledButton
+            type="danger"
+            onClick={() => logout()}
+            style={{ height: "25px" }}
+          >
+            <span style={{ padding: "0 25px" }}>注销</span>
           </StyledButton>
         </Div>
       ) : (
         <Div>
-          <StyledButton type="primary">
+          <StyledButton type="default">
             <StyledLink to="/login">登录</StyledLink>
           </StyledButton>
           <StyledButton type="primary">

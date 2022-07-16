@@ -44,34 +44,62 @@ const History = observer(() => {
     ImgURL: ${item.attributes.url.attributes.url}`,
   }));
   return (
-    <>
-      <List
-        style={{ margin: "20px 30px" }}
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          pageSize: 5,
-        }}
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item
-            key={item.heft}
-            extra={<img width={272} alt="logo" src={item.href} />}
-          >
-            <List.Item.Meta
-              style={{
-                whiteSpace: "pre-line",
-                wordBreak: "break-all",
-                wordWrap: "break-word",
-              }}
-              avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.href}>{item.title}</a>}
-              description={item.description}
-            />
-          </List.Item>
-        )}
-      />
-    </>
+    <div
+      style={{
+        background: "grey",
+        flexGrow: "1",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      {Stores.currentUser ? (
+        <List
+          style={{
+            margin: "10px 200px 0px 100px",
+            padding: "10px 20px 20px 20px",
+            boxShadow:
+              "2px 2px 4px 0 rgba(0,0,0,0.1),-2px -2px 4px 0 rgba(0,0,0,0.)",
+            borderRadius: "4px 4px 0 0",
+            background: "white",
+          }}
+          itemLayout="vertical"
+          size="large"
+          pagination={{
+            pageSize: 5,
+            defaultCurrent: 1,
+            total: `${Stores.newHistoryList.length}`,
+          }}
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item
+              key={item.heft}
+              extra={<img width={272} alt="logo" src={item.href} />}
+            >
+              <List.Item.Meta
+                style={{
+                  whiteSpace: "pre-line",
+                  wordBreak: "break-all",
+                  wordWrap: "break-word",
+                }}
+                avatar={<Avatar src={item.avatar} />}
+                title={<a href={item.href}>{item.title}</a>}
+                description={item.description}
+              />
+            </List.Item>
+          )}
+        />
+      ) : (
+        <List
+          style={{
+            background: "white",
+            flexGrow: "1",
+            padding: "100px",
+          }}
+          renderItem={(item) => <List.Item key={item.heft}></List.Item>}
+        />
+      )}
+    </div>
   );
 });
 
