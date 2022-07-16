@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { NavLink } from "react-router-dom";
 import Stores from "../stores/index";
 import { Auth } from "../models/index";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
 import logo from "../icons/logo.svg";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const Wrapper = styled.div`
   display: flex;
@@ -56,13 +57,30 @@ const Header = observer(() => {
       {Stores.currentUser ? (
         <Div>
           {Stores.serverFile ? (
-            <StyledButton
-              type="default"
-              onClick={() => Stores.resetServerFile()}
-              style={{ height: "25px", padding: "0 20px" }}
-            >
-              重新上传
-            </StyledButton>
+            <>
+              <CopyToClipboard
+                text={Stores.serverFile.attributes.url.attributes.url}
+                onCopy={() => message.success("复制成功~")}
+              >
+                <Button
+                  type="default"
+                  style={{
+                    height: "25px",
+                    padding: "0 20px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  复制 imgUrl
+                </Button>
+              </CopyToClipboard>
+              <StyledButton
+                type="default"
+                onClick={() => Stores.resetServerFile()}
+                style={{ height: "25px", padding: "0 20px" }}
+              >
+                重新上传
+              </StyledButton>
+            </>
           ) : (
             ""
           )}

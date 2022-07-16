@@ -1,6 +1,8 @@
 import Stores from "../stores/index";
 import { observer } from "mobx-react";
 import styled from "styled-components";
+import { message } from "antd";
+import { useEffect } from "react";
 
 const WrapperImg = styled.div`
   position: relative;
@@ -17,6 +19,12 @@ const WrapperImg = styled.div`
 `;
 
 const ShowImg = observer(() => {
+  const success = () => {
+    message.success("图片已成功上传!", 3);
+  };
+  useEffect(() => {
+    success();
+  }, []);
   return (
     <>
       {Stores.serverFile ? (
