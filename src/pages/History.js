@@ -56,7 +56,7 @@ const History = observer(() => {
       {Stores.currentUser && Stores.newHistoryList.length !== 0 ? (
         <List
           style={{
-            margin: "10px 200px 0px 100px",
+            margin: "10px 200px 10px 100px",
             padding: "10px 20px 20px 20px",
             boxShadow:
               "2px 2px 4px 0 rgba(0,0,0,0.1),-2px -2px 4px 0 rgba(0,0,0,0.)",
@@ -67,7 +67,7 @@ const History = observer(() => {
           itemLayout="vertical"
           size="large"
           pagination={{
-            pageSize: 4,
+            pageSize: 5,
             defaultCurrent: 1,
             total: `${Stores.newHistoryList.length}`,
             hideOnSinglePage: true,
