@@ -11,7 +11,9 @@ const Wrapper = styled.div`
 `;
 const Title = styled.h1`
   text-align: center;
-  padding: 0 0 24px 0;
+  padding: 0 0 18px 0;
+  font-size: 24px;
+  font-weight: 500;
 `;
 const StyledForm = styled(Form)`
   margin-top: 72px;
@@ -22,6 +24,7 @@ const StyledForm = styled(Form)`
 `;
 
 const AuthForm = observer(({ name }) => {
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   const onFinish = (values) => {
     const { username, password } = values;
@@ -48,6 +51,9 @@ const AuthForm = observer(({ name }) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const onReset = () => {
+    form.resetFields();
+  };
   const passwordConfirm = (formInstance) => ({
     validator(rule, value) {
       const { getFieldValue } = formInstance;
@@ -72,6 +78,7 @@ const AuthForm = observer(({ name }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        form={form}
       >
         <Title>{name === "register" ? "注册" : "登录"}</Title>
         <StyledForm.Item
@@ -113,9 +120,16 @@ const AuthForm = observer(({ name }) => {
           <Button
             type="primary"
             htmlType="submit"
+            style={{ borderRadius: "4px", marginRight: "16px" }}
+          >
+            提交
+          </Button>
+          <Button
+            htmlType="button"
+            onClick={onReset}
             style={{ borderRadius: "4px" }}
           >
-            Submit
+            重置
           </Button>
         </StyledForm.Item>
       </StyledForm>

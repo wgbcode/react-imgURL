@@ -7,7 +7,7 @@ const UploadImg = observer((props) => {
     showUploadList: false,
     beforeUpload: (file) => {
       if (Stores.currentUser === null) {
-        message.warning("请先登录再上传！");
+        message.warning("请登录后再上传图片！");
         return false;
       }
       if (!/(png$)|(jpg$)|(jpeg$)|(gif$)/gi.test(file.type)) {

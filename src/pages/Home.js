@@ -1,6 +1,6 @@
 import Stores from "../stores/index";
 import { observer } from "mobx-react";
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 import UploadImg from "../components/UploadImg";
 import ShowImg from "../components/ShowImg";
 import add from "../icons/add.svg";
