@@ -13,8 +13,12 @@ const Wrapper = styled.div`
   flex-direction: colomn;
   justify-content: space-between;
   background: white;
-  padding: 12px 35px 18px 35px;
+  padding: 18px 35px 25px 35px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  a,
+  button {
+    font-size: 18px;
+  }
 `;
 const Div = styled.div`
   display: flex;
@@ -46,7 +50,7 @@ const Header = observer(() => {
       <Div>
         <img
           src={logo}
-          style={{ height: "2em", paddingRight: "20px", paddingTop: "3px" }}
+          style={{ height: "2.5em", paddingRight: "25px", paddingTop: "3px" }}
         />
         <StyledLink to="/home" onClick={() => Stores.resetServerFile()}>
           首页
@@ -65,8 +69,8 @@ const Header = observer(() => {
                 <Button
                   type="default"
                   style={{
-                    height: "25px",
-                    padding: "0 20px",
+                    height: "30px",
+                    padding: "0 25px",
                     borderRadius: "4px",
                   }}
                 >
@@ -76,7 +80,7 @@ const Header = observer(() => {
               <StyledButton
                 type="default"
                 onClick={() => Stores.resetServerFile()}
-                style={{ height: "25px", padding: "0 20px" }}
+                style={{ height: "30px", padding: "0 25px" }}
               >
                 Image Upload
               </StyledButton>
@@ -87,9 +91,9 @@ const Header = observer(() => {
           <StyledButton
             type="danger"
             onClick={() => logout()}
-            style={{ height: "25px" }}
+            style={{ height: "30px" }}
           >
-            <span style={{ padding: "0 25px" }}>注销</span>
+            <span style={{ padding: "0 30px" }}>注销</span>
           </StyledButton>
         </Div>
       ) : (

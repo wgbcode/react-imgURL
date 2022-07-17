@@ -9,7 +9,7 @@ import picture from "../icons/picture.svg";
 import warn from "../icons/warn.svg";
 
 const WrapperWarn = styled.div`
-  font-size: 16px;
+  font-size: 18px;
   background: #cfe8fd;
   margin: 50px 100px 0px 100px;
   padding: 10px 15px;
@@ -26,12 +26,12 @@ const WrapperUpload = styled.div`
   .title {
     h1 {
       text-shadow: 4px 3px 1px rgba(108, 101, 101, 0.47);
-      font-size: 24px;
+      font-size: 28px;
     }
     p {
-      font-size: 12px;
+      font-size: 14px;
       font-weigth: 300;
-      padding: 0px 0 15px 0;
+      padding: 3px 0 18px 0;
     }
   }
   .loadImg1 {
@@ -45,7 +45,7 @@ const WrapperUpload = styled.div`
       .ant-upload {
         width: 100%;
         background: white;
-        height: 250px;
+        height: 280px;
         margin: 0;
         border: none;
       }
@@ -58,13 +58,14 @@ const WrapperUpload = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
+    font-size: 14px;
     padding-left: 10px;
     button {
       border: none;
       background: #2383eb;
       color: white;
-      padding: 6px 15px;
+      font-size: 16px;
+      padding: 12px 15px;
       border-radius: 0 4px 4px 0;
     }
   }

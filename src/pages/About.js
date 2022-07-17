@@ -6,8 +6,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
-  line-height: 30px;
-  font-size: 14px;
+  line-height: 45px;
+  font-size: 18px;
   .wrapper {
     padding: 20px 50px;
     display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     width: 70vw;
     .title {
       padding: 5px 0;
-      font-size: 18px;
+      font-size: 24px;
       text-align: center;
       font-weight: 500;
     }
@@ -27,10 +27,10 @@ const Wrapper = styled.div`
         padding: 10px 0 5px 0;
         img {
           height: 1.5em;
-          padding-right: 8px;
+          padding-right: 12px;
         }
         h2 {
-          font-size: 16px;
+          font-size: 20px;
           font-weight: 550;
           margin: 0;
         }

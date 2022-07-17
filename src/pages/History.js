@@ -4,6 +4,17 @@ import Stores from "../stores/index";
 import { Avatar, List, Space } from "antd";
 import { observer } from "mobx-react";
 import dayjs from "dayjs";
+import styled from "styled-components";
+
+const StyledMeta = styled(List.Item.Meta)`
+  .ant-list-item-meta-title {
+    font-size: 20px;
+  }
+  .ant-list-item-meta-description {
+    font-size: 14px;
+    line-height: 30px;
+  }
+`;
 
 const History = observer(() => {
   useEffect(() => {
@@ -78,7 +89,7 @@ const History = observer(() => {
               key={item.heft}
               extra={<img width={272} alt="logo" src={item.href} />}
             >
-              <List.Item.Meta
+              <StyledMeta
                 style={{
                   whiteSpace: "pre-line",
                   wordBreak: "break-all",
