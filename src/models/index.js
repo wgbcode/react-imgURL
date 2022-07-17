@@ -1,9 +1,9 @@
 import AV from "leancloud-storage";
 
 AV.init({
-  appId: "3XYdRUVfkERSi6IqIoi2G9Rr-gzGzoHsz",
-  appKey: "6WN7Az83Dtht7NyQv9QA08ec",
-  serverURL: "https://3xydruvf.lc-cn-n1-shared.com",
+  appId: "itWl2eh5wy3fdbGo6i8RFSMe-MdYXbMMI",
+  appKey: "4hzHzkjpIokCLH6wxcPTbc4y",
+  serverURL: "https://itwl2eh5.api.lncldglobal.com",
 });
 
 const Auth = {

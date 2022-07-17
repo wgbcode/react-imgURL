@@ -1,7 +1,7 @@
-cd dist
+yarn build
+cd build
 git init
-git add .
+git add -A
 git commit -m "deploy"
-git remote add origin git@github.com:wgbcode/react-imgURL-webpage.git
-git push origin master
+git push -f git@github.com:wgbcode/react-imgURL-webpage.git
 cd -
