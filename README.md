@@ -2,7 +2,7 @@
 
 imgURL 图床能提供稳定的图片上传和存储服务，并能在上传图片之后生成一个 URL 链接，可以直接使用。
 
-## 源码使用命令行
+## 源码使用
 
 - yarn clone SSHUrl
 - yarn install
