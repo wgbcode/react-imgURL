@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   a,
   button {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 const Div = styled.div`
@@ -29,7 +29,6 @@ const Div = styled.div`
 const StyledLink = styled(NavLink)`
   padding: 0px 20px;
   color: black;
-  font-size: 14px;
 `;
 const StyledButton = styled(Button)`
   margin: 0 12px;
@@ -98,10 +97,20 @@ const Header = observer(() => {
         </Div>
       ) : (
         <Div>
-          <StyledButton type="default">
+          <StyledButton
+            type="default"
+            onClick={() => {
+              message.error("域名维护中，暂时无法登录！");
+            }}
+          >
             <StyledLink to="/login">登录</StyledLink>
           </StyledButton>
-          <StyledButton type="primary">
+          <StyledButton
+            type="primary"
+            onClick={() => {
+              message.error("域名维护中，暂时无法注册！");
+            }}
+          >
             <StyledLink to="/register">注册</StyledLink>
           </StyledButton>
         </Div>

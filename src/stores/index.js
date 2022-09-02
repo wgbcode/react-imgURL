@@ -1,6 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { Auth, Uploader } from "../models/index";
-import { message } from "antd";
 
 class Stores {
   currentUser = null;
@@ -50,7 +49,6 @@ class Stores {
         }); //只能在 action 中赋值
       })
       .catch((error) => {
-        message.error("加载数据失败");
         console.log(error);
       });
   }
