@@ -34,7 +34,7 @@ const AuthForm = observer(({ name }) => {
           navigate("/login");
         })
         .catch((error) => {
-          message.error("用户名已存在！");
+          message.error("注册失败！");
           console.log(error);
         });
     } else if (name === "login") {
@@ -44,7 +44,10 @@ const AuthForm = observer(({ name }) => {
           Stores.pullUser();
           window.Auth = Auth;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          message.error("登录失败！");
+          console.log(error);
+        });
     }
   };
 
@@ -69,6 +72,7 @@ const AuthForm = observer(({ name }) => {
       return Promise.reject("请输入3~8个字符");
     return Promise.resolve();
   };
+
   return (
     <Wrapper>
       <StyledForm
