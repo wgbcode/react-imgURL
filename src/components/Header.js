@@ -81,7 +81,7 @@ const Header = observer(() => {
                 onClick={() => Stores.resetServerFile()}
                 style={{ height: "30px", padding: "0 25px" }}
               >
-                Image Upload
+                Upload Again
               </StyledButton>
             </>
           ) : (
@@ -97,20 +97,10 @@ const Header = observer(() => {
         </Div>
       ) : (
         <Div>
-          <StyledButton
-            type="default"
-            onClick={() => {
-              message.error("域名维护中，暂时无法登录！");
-            }}
-          >
+          <StyledButton type="default">
             <StyledLink to="/login">登录</StyledLink>
           </StyledButton>
-          <StyledButton
-            type="primary"
-            onClick={() => {
-              message.error("域名维护中，暂时无法注册！");
-            }}
-          >
+          <StyledButton type="primary">
             <StyledLink to="/register">注册</StyledLink>
           </StyledButton>
         </Div>
